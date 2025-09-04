@@ -1,6 +1,6 @@
 {
-    "name": "suporteleiloes/website-api",
-    "description": "Métodos para comunicação via API com ERP da Suporte Leilões para websites",
+    "name": "fnbassets/website-api",
+    "description": "Métodos para comunicação via API para websites",
     "type": "library",
     "require": {
         "php": "^8.2",
@@ -16,13 +16,17 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Suporteleiloes\\WebsiteApi\\": "src/"
+            "Fnbassets\\WebsiteApi\\": "src/"
         }
     },
     "authors": [
         {
             "name": "Tiago Felipe",
             "email": "tiago@tiagofelipe.com"
+        },
+        {
+            "name": "Samuel Ribeiro Rangel",
+            "email": "samuel.rrangel529@gmail.com"
         }
     ],
     "require-dev": {
@@ -31,7 +35,7 @@
     },
     "extra": {
       "branch-alias": {
-        "dev-main": "2.x-dev"
+        "dev-fenaju": "2.x-dev"
       }
     }
 }
