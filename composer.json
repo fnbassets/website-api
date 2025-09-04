@@ -35,6 +35,7 @@
     },
     "extra": {
       "branch-alias": {
+        "dev-main": "2.x-dev",
         "dev-fenaju": "2.x-dev"
       }
     }
