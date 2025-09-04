@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Suporteleiloes\WebsiteApi\ApiService;
+use Fnbassets\WebsiteApi\ApiService;
 
 class ApiClientTest extends TestCase
 {

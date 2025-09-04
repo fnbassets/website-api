@@ -1,6 +1,6 @@
 <?php
 
-namespace Suporteleiloes\WebsiteApi\Utils;
+namespace Fnbassets\WebsiteApi\Utils;
 
 class Sluggable
 {

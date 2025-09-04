@@ -1,8 +1,8 @@
 <?php
 
-namespace Suporteleiloes\WebsiteApi;
+namespace Fnbassets\WebsiteApi;
 
-use Suporteleiloes\WebsiteApi\Traits\HttpTrait;
+use Fnbassets\WebsiteApi\Traits\HttpTrait;
 
 class ApiService
 {

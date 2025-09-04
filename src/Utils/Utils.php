@@ -8,7 +8,7 @@
  * distribuído junto com o código fonte.
  */
 
-namespace Suporteleiloes\WebsiteApi\Utils;
+namespace Fnbassets\WebsiteApi\Utils;
 
 
 trait Utils

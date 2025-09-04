@@ -1,10 +1,10 @@
 <?php
 
-namespace Suporteleiloes\WebsiteApi\Traits;
+namespace Fnbassets\WebsiteApi\Traits;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
-use Suporteleiloes\WebsiteApi\Utils\Utils;
+use Fnbassets\WebsiteApi\Utils\Utils;
 
 trait HttpTrait
 {
