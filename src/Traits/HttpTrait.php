@@ -8,6 +8,8 @@ use Fnbassets\WebsiteApi\Utils\Utils;
 
 trait HttpTrait
 {
+    use Utils;
+
     protected $client;
     protected $params;
 
@@ -21,7 +23,7 @@ trait HttpTrait
             'uloc-mi' => $this->apiClient,
             'X-AUTH-TOKEN' => $this->apiKey,
             'User-Agent' => $_SERVER['HTTP_USER_AGENT'] ?? null,
-            'X_FORWARDED_FOR' => Utils::get_client_ip_env(),
+            'X_FORWARDED_FOR' => self::get_client_ip_env(),
         ];
         if ($token && $this->getUserToken()) {
             unset($headers['X-AUTH-TOKEN']);
