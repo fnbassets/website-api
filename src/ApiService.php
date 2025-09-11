@@ -33,6 +33,12 @@ class ApiService
         return http_build_query($params);
     }
 
+    public function listTradutores($options = [], $page = 1, $limit = 100)
+    {
+        $queryString = $this->parseParams($options, ['page' => $page, 'limit' => $limit]);
+        return $this->callApi('get', '/api/public/tradutores?' . $queryString);
+    }
+
     public function listLeiloes($options = [], $page = 1, $limit = 100)
     {
 
