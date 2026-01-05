@@ -93,6 +93,17 @@ class ApiService
         return $this->callApi('get', '/api/public/banners?' . $queryString);
     }
 
+    public function listPopups($options = [])
+    {
+        $queryString = $this->parseParams($options, 1, 10000);
+        return $this->callApi('get', '/api/public/popup?' . $queryString);
+    }
+
+    public function loadPopup($id)
+    {
+        return $this->callApi('get', '/api/public/popup/' . $id);
+    }
+
     public function listContents($options = [], $page = 1, $limit = 100)
     {
         $queryString = $this->parseParams($options, $page, $limit);
