@@ -33,6 +33,12 @@ class ApiService
         return http_build_query($params);
     }
 
+    public function listEditais($options = [], $page = 1, $limit = 100)
+    {
+        $queryString = $this->parseParams($options, $page, $limit);
+        return $this->callApi('get', '/api/public/editais?' . $queryString);
+    }
+
     public function listLeiloes($options = [], $page = 1, $limit = 100)
     {
 
