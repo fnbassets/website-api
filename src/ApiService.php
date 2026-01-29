@@ -173,9 +173,138 @@ class ApiService
         ]);
     }
 
-    /**
-     * Métodos do usuário logado
-     */
+    public function loginVerify2FA($tempToken, $code, $isBackupCode = false, $headers = [])
+    {
+        $payload = [
+            '2fa' => true,
+            'method' => 'totp',
+            'token' => $tempToken,
+            'code' => $code,
+        ];
+
+        if ($isBackupCode) {
+            $payload['type'] = 'backup';
+        }
+
+        return $this->callApi('post', '/api/auth', [
+            'json' => $payload,
+            'headers' => $headers
+        ]);
+    }
+
+    public function getTfaPublicConfig()
+    {
+        return $this->callApi('get', '/api/public/tfa/config');
+    }
+
+    public function getTfaStatus()
+    {
+        return $this->callAuthApi('get', '/api/tfa/status');
+    }
+
+    public function setupTfa()
+    {
+        return $this->callAuthApi('post', '/api/tfa/setup');
+    }
+
+    public function confirmTfa($code)
+    {
+        return $this->callAuthApi('post', '/api/tfa/confirm', [
+            'json' => [
+                'code' => $code
+            ]
+        ]);
+    }
+
+    public function disableTfa($password, $totpCode = null)
+    {
+        $payload = ['password' => $password];
+
+        if ($totpCode !== null) {
+            $payload['totpCode'] = $totpCode;
+        }
+
+        return $this->callAuthApi('post', '/api/tfa/disable', [
+            'json' => $payload
+        ]);
+    }
+
+    public function verifyTfaCode($code)
+    {
+        return $this->callAuthApi('post', '/api/tfa/verify', [
+            'json' => [
+                'code' => $code
+            ]
+        ]);
+    }
+
+    public function regenerateBackupCodes($password, $download = false)
+    {
+        $payload = ['password' => $password];
+
+        if ($download) {
+            $payload['download'] = true;
+        }
+
+        return $this->callAuthApi('post', '/api/tfa/backup-codes', [
+            'json' => $payload
+        ]);
+    }
+
+    public function canDownloadBackupCodes()
+    {
+        return $this->callAuthApi('get', '/api/tfa/backup-codes/can-download');
+    }
+
+    public function requestTfaRecoveryPublic($email, $selfie, $turnstileToken)
+    {
+        return $this->callApi('post', '/api/public/tfa/recovery/request', [
+            'json' => [
+                'email' => $email,
+                'selfie' => $selfie,
+                'cf-turnstile-response' => $turnstileToken
+            ]
+        ]);
+    }
+
+    public function requestTfaRecovery($selfie = null)
+    {
+        $payload = [];
+        if ($selfie !== null) {
+            $payload['selfie'] = $selfie;
+        }
+
+        return $this->callAuthApi('post', '/api/tfa/recovery/request', [
+            'json' => $payload
+        ]);
+    }
+
+    public function getTfaRecoveryStatus()
+    {
+        return $this->callAuthApi('get', '/api/tfa/recovery/status');
+    }
+
+    public function cancelTfaRecoveryRequest($id)
+    {
+        return $this->callAuthApi('delete', '/api/tfa/recovery/request/' . $id);
+    }
+
+    public function alterarSenha($oldPassword, $newPassword, $totpCode = null)
+    {
+        $payload = [
+            'oldPassword' => $oldPassword,
+            'password' => $newPassword
+        ];
+
+        if ($totpCode !== null) {
+            $payload['totpCode'] = $totpCode;
+        }
+
+        return $this->callAuthApi('patch', '/api/public/arrematantes/alterarSenha', [
+            'json' => $payload
+        ]);
+    }
+
     public function recuperarSenha($userNameOrEmail)
     {
         return $this->callApi('post', '/api/public/arrematantes/service/recupera-senha', [
@@ -185,17 +314,20 @@ class ApiService
         ]);
     }
 
-    /**
-     * Métodos do usuário logado
-     */
-    public function recuperarSenhaConfirmar($id, $token, $password)
+    public function recuperarSenhaConfirmar($id, $token, $password, $totpCode = null)
     {
+        $payload = [
+            'id' => $id,
+            'token' => $token,
+            'password' => $password
+        ];
+
+        if ($totpCode !== null) {
+            $payload['totpCode'] = $totpCode;
+        }
+
         return $this->callApi('put', '/api/public/arrematantes/service/recupera-senha', [
-            'json' =>  [
-                'id' => $id,
-                'token' => $token,
-                'password' => $password
-            ]
+            'json' => $payload
         ]);
     }
 
