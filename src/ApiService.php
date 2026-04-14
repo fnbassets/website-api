@@ -153,6 +153,11 @@ class ApiService
         return $this->callApi('get', '/api/public/cache/vendedores');
     }
 
+    public function getHome()
+    {
+        return $this->callApi('get', '/api/public/website/home');
+    }
+
     public function getComitente($id, $incluirEventos = true, $incluirDestaques = true)
     {
         $queryString = $this->parseParams([
